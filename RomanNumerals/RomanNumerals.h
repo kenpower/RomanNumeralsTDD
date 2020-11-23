@@ -1,75 +1,17 @@
 #pragma once
 #include <string>
+#include <vector>
+
 static std::string unitsDigit(int digit)
 {
-	switch (digit) {
-	case 0:
-		return "";
-		break;
-	case 1:
-		return "I";
-		break;
-	case 2:
-		return "II";
-		break;
-	case 3:
-		return "III";
-		break;
-	case 4:
-		return "IV";
-		break;
-	case 5:
-		return "V";
-		break;
-	case 6:
-		return "VI";
-		break;
-	case 7:
-		return "VII";
-		break;
-	case 8:
-		return "VIII";
-		break;
-	case 9:
-		return "IX";
-		break;
-	}
+	std::vector<std::string> unitsAsString{ "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+	return unitsAsString[digit];
 }
 
 static std::string tensDigit(int digit)
 {
-	switch (digit) {
-	case 0:
-		return "";
-		break;
-	case 1:
-		return "X";
-		break;
-	case 2:
-		return "XX";
-		break;
-	case 3:
-		return "XXX";
-		break;
-	case 4:
-		return "XL";
-		break;
-	case 5:
-		return "L";
-		break;
-	case 6:
-		return "LX";
-		break;
-	case 7:
-		return "LXX";
-		break;
-	case 8:
-		return "LXXX";
-		break;
-	case 9:
-		return "XC";
-		break;
-	}
+	std::vector<std::string> tensAsString{ "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
+	return tensAsString[digit];
 }
 
 class RomanNumerals
