@@ -20,7 +20,7 @@ static std::string hundredsDigit(int digit)
 	return hundredsAsString[digit];
 }
 
-static std::string thousdandsDigit(int digit)
+static std::string thousandsDigit(int digit)
 {
 	std::vector<std::string> thousandsAsString{ "", "M", "MM", "MMM" };
 	return thousandsAsString[digit];
@@ -35,9 +35,9 @@ public:
 		int units = number % 10;
 		int tens = ((number % 100) - units) / 10;
 		int hundreds = ((number % 1000) - tens*10 -units) / 100;
-		int thousdands = ((number % 10000) - hundreds*100 - tens * 10 - units) / 1000;
+		int thousands = ((number % 10000) - hundreds*100 - tens * 10 - units) / 1000;
 
-		romanNumeral.append(thousdandsDigit(thousdands));
+		romanNumeral.append(thousandsDigit(thousands));
 		romanNumeral.append(hundredsDigit(hundreds));
 		romanNumeral.append(tensDigit(tens));
 		romanNumeral.append(unitsDigit(units));
