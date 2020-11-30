@@ -41,25 +41,15 @@ SingleDigitToRomanConvertor SingleDigitToRomanConvertor::Units(0, { "", "I", "II
 
 class RomanNumerals
 {
-	static std::vector<SingleDigitToRomanConvertor> convertors;
-
-
 public:
 	static std::string convertFromInteger(int number) {
-		std::string romanNumeral{ "" };
-
-		for (SingleDigitToRomanConvertor convertor: convertors) {
-			romanNumeral = convertor.toString(number) + romanNumeral;
-		}
-
-		return romanNumeral;
+		return
+			SingleDigitToRomanConvertor::Thousands.toString(number)+
+			SingleDigitToRomanConvertor::Hundreds.toString(number) +
+			SingleDigitToRomanConvertor::Tens.toString(number) +
+			SingleDigitToRomanConvertor::Units.toString(number);
 	}
 };
 
-std::vector<SingleDigitToRomanConvertor> RomanNumerals::convertors{ 
-	SingleDigitToRomanConvertor::Units,
-	SingleDigitToRomanConvertor::Tens,
-	SingleDigitToRomanConvertor::Hundreds,
-	SingleDigitToRomanConvertor::Thousands
-};
+
 
