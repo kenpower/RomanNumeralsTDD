@@ -2,59 +2,64 @@
 #include <string>
 #include <vector>
 
-class RomanNumerals
-{
-private:
-	static const std::vector<std::string> unitsAsString;
-	static const std::vector<std::string> tensAsString;
-	static const std::vector<std::string> hundredsAsString;
-	static const std::vector<std::string> thousandsAsString;
-
-	static enum DigitRank { UNITS = 0, TENS = 1, HUNDREDS = 2, THOUSANDS =3, END};
+class SingleDigitToRomanConvertor {
+	int digitPlace;
+	const std::vector<std::string> numerals;
+	SingleDigitToRomanConvertor(int digitPlace, const std::vector<std::string> numerals) :
+		digitPlace(digitPlace),
+		numerals(numerals) {}
 
 	static int shiftRight(int number) {
 		int rightDigit = number % 10;
 		return (number - rightDigit) / 10;
 	}
 
-	static int getNthDigit(int number, int rank) {
-		for (int i = 0; i < rank; i++) {
+	int getDigitInPlace(int number) {
+		for (int i = 0; i < digitPlace; i++) {
 			number = shiftRight(number);
 		}
 
 		return number % 10;
 	}
 
-	static std::string digitAsRomanString(int digit, int rank) {
-		switch (rank) {
-		case DigitRank::UNITS:
-			return unitsAsString[digit];
-		case DigitRank::TENS:
-			return tensAsString[digit];
-		case DigitRank::HUNDREDS:
-			return hundredsAsString[digit];
-		case DigitRank::THOUSANDS:
-			return thousandsAsString[digit];
-		default:
-			return "";
-		}
-	}
+public:
+	static SingleDigitToRomanConvertor Thousands;
+	static SingleDigitToRomanConvertor Hundreds;
+	static SingleDigitToRomanConvertor Tens;
+	static SingleDigitToRomanConvertor Units;
+
+	std::string toString(const int number) {
+		int digit = getDigitInPlace(number);
+		return numerals[digit];
+	};
+};
+
+SingleDigitToRomanConvertor SingleDigitToRomanConvertor::Thousands(3, { "", "M", "MM", "MMM" });
+SingleDigitToRomanConvertor SingleDigitToRomanConvertor::Hundreds(2, { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" });
+SingleDigitToRomanConvertor SingleDigitToRomanConvertor::Tens(1, { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" });
+SingleDigitToRomanConvertor SingleDigitToRomanConvertor::Units(0, { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" });
+
+class RomanNumerals
+{
+	static std::vector<SingleDigitToRomanConvertor> convertors;
 
 
 public:
 	static std::string convertFromInteger(int number) {
 		std::string romanNumeral{ "" };
 
-		for (int rank = DigitRank::UNITS; rank != DigitRank::END; rank++) {
-			romanNumeral =  digitAsRomanString(getNthDigit(number, rank), rank) + romanNumeral;
+		for (SingleDigitToRomanConvertor convertor: convertors) {
+			romanNumeral = convertor.toString(number) + romanNumeral;
 		}
 
 		return romanNumeral;
 	}
 };
 
-const std::vector<std::string> RomanNumerals::thousandsAsString{ "", "M", "MM", "MMM" };
-const std::vector<std::string> RomanNumerals::hundredsAsString{ "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
-const std::vector<std::string> RomanNumerals::tensAsString{ "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
-const std::vector<std::string> RomanNumerals::unitsAsString{ "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+std::vector<SingleDigitToRomanConvertor> RomanNumerals::convertors{ 
+	SingleDigitToRomanConvertor::Units,
+	SingleDigitToRomanConvertor::Tens,
+	SingleDigitToRomanConvertor::Hundreds,
+	SingleDigitToRomanConvertor::Thousands
+};
 
