@@ -10,19 +10,28 @@ private:
 	static const std::vector<std::string> hundredsAsString;
 	static const std::vector<std::string> thousandsAsString;
 
+	static int shiftRight(int number) {
+		int rightDigit = number % 10;
+		return (number - rightDigit) / 10;
+	}
+
+	static int getNthDigit(int number, int n) {
+		for (int i = 0; i < n; i++) {
+			number = shiftRight(number);
+		}
+
+		return number % 10;
+	}
+
+
 public:
 	static std::string convertFromInteger(int number) {
 		std::string romanNumeral{ "" };
 
-		int units = number % 10;
-		int tens = ((number % 100) - units) / 10;
-		int hundreds = ((number % 1000) - tens*10 -units) / 100;
-		int thousands = ((number % 10000) - hundreds*100 - tens * 10 - units) / 1000;
-
-		romanNumeral.append(thousandsAsString[thousands]);
-		romanNumeral.append(hundredsAsString[hundreds]);
-		romanNumeral.append(tensAsString[tens]);
-		romanNumeral.append(unitsAsString[units]);
+		romanNumeral.append(thousandsAsString[getNthDigit(number, 3)]);
+		romanNumeral.append(hundredsAsString[getNthDigit(number, 2)]);
+		romanNumeral.append(tensAsString[getNthDigit(number, 1)]);
+		romanNumeral.append(unitsAsString[getNthDigit(number, 0)]);
 
 		return romanNumeral;
 	}
