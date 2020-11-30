@@ -23,8 +23,8 @@ public:
 		int units = number % 10;
 		int tens = ((number % 100) - units)/10;
 
-		romanNumeral.append(unitsDigit(units));
 		romanNumeral.append(tensDigit(tens));
+		romanNumeral.append(unitsDigit(units));
 
 		return romanNumeral;
 	}

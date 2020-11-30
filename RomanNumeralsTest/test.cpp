@@ -18,13 +18,13 @@ TEST(RomanNumerals, singleDigit) {
 }
 TEST(RomanNumerals, doubleDigits) {
 	EXPECT_EQ("X",        RomanNumerals::convertFromInteger(10));
-	//EXPECT_EQ("XI",       RomanNumerals::convertFromInteger(11));
-	//EXPECT_EQ("XXII",     RomanNumerals::convertFromInteger(22));
-	//EXPECT_EQ("XXXIII",   RomanNumerals::convertFromInteger(33));
-	//EXPECT_EQ("XLIV",     RomanNumerals::convertFromInteger(44));
-	//EXPECT_EQ("LV",       RomanNumerals::convertFromInteger(55));
-	//EXPECT_EQ("LXVI",     RomanNumerals::convertFromInteger(66));
-	//EXPECT_EQ("LXXVII",   RomanNumerals::convertFromInteger(77));
-	//EXPECT_EQ("LXXXVIII", RomanNumerals::convertFromInteger(88));
-	//EXPECT_EQ("XCIX",     RomanNumerals::convertFromInteger(99));
+	EXPECT_EQ("XI",       RomanNumerals::convertFromInteger(11));
+	EXPECT_EQ("XXII",     RomanNumerals::convertFromInteger(22));
+	EXPECT_EQ("XXXIII",   RomanNumerals::convertFromInteger(33));
+	EXPECT_EQ("XLIV",     RomanNumerals::convertFromInteger(44));
+	EXPECT_EQ("LV",       RomanNumerals::convertFromInteger(55));
+	EXPECT_EQ("LXVI",     RomanNumerals::convertFromInteger(66));
+	EXPECT_EQ("LXXVII",   RomanNumerals::convertFromInteger(77));
+	EXPECT_EQ("LXXXVIII", RomanNumerals::convertFromInteger(88));
+	EXPECT_EQ("XCIX",     RomanNumerals::convertFromInteger(99));
 }
